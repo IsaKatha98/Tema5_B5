@@ -18,9 +18,9 @@ public class Ejercicio3 {
 		int tabla[][] = new int[4][5];
 		int nota; // Variable que introduce el usuario.
 		int notaMax = 0; // nota máxima de las notas.
-		int notaMin = 0; // nota mínima de todas las notas.
+		int notaMin = 10; // nota mínima de todas las notas.
 		int sumaNotas = 0; // sumatoria de notas de un alumno.
-		int media=0;
+		double media;
 
 		// Creamos un escáner.
 		Scanner sc = new Scanner(System.in);
@@ -30,39 +30,24 @@ public class Ejercicio3 {
 		for (int i = 0; i < tabla.length; i++) {
 
 			// Este for cuenta las asignaturas.
-			for (int j = 0; j < tabla.length + 1; j++) {
+			for (int j = 0; j < tabla[i].length; j++) {
 
-				// Preguntamos por las notas.
 				System.out
 						.println("Introduzca las notas del alumno " + (i + 1) + " de la asignatura " + (j + 1) + ": ");
-				tabla[i][j] = sc.nextInt();
+				nota = sc.nextInt();
 
-				// Guardamos los valores introducidos en una variable para que sea más fácil
-				// trabajar con ellos
-				nota = tabla[i][j];
+				while (nota < 1 || nota > 10) {
 
-				// Las vamos sumando para hacer la media a posteriori.
-				sumaNotas += nota;
+					// Preguntamos por las notas, tiene que estar entre 1 y 10.
+					System.out.println(
+							"Error.Introduzca las notas del alumno " + (i + 1) + " de la asignatura " + (j + 1) + ": ");
+					nota = sc.nextInt();
 
-				// También las clasificamos según sean las nota máxima o mínima.
-				if (nota > notaMax) {
-
-					notaMax = nota;
 				}
 
-				if (nota < notaMin) {
-
-					notaMin = nota;
-				}
-
-				// Hacemos la media.
-				media = sumaNotas / 5;
-
+				tabla[i][j] = nota;
 			}
 
-			System.out.println("La nota media del alumno "+(i+1)+" es: "+media);
-			System.out.println("La nota máxima del alumno "+(i+1)+ " es: "+notaMax);
-			System.out.println("La nota mínima del alumno "+ (i+1)+" es: "+notaMin);
 		}
 
 		// Hacemos un bucle for para poder imprimar la matriz de forma correcta
@@ -74,10 +59,40 @@ public class Ejercicio3 {
 
 		// Presentamos los datos, repitiendo los bucles.
 		// Este for contará los estudiantes.
-		for (int i = 0; i < tabla.length; i++) {
+		for (int i1 = 0; i1 < tabla.length; i1++) {
+			
+			//Reinicializamos los valores.
+			notaMax=0;
+			notaMin=10;
+			sumaNotas=0;
+			
 
-			
-			
+			for (int j = 0; j < tabla[i1].length; j++) {
+
+				
+
+				// También las clasificamos según sean las nota máxima o mínima.
+				if (tabla[i1][j] > notaMax) {
+
+					notaMax = tabla[i1][j];
+				}
+
+				if (tabla[i1][j] < notaMin) {
+
+					notaMin = tabla[i1][j];
+				}
+
+				// Las vamos sumando para hacer la media a posteriori.
+				sumaNotas += tabla[i1][j];
+			}
+
+			// Hacemos la media.
+			media = sumaNotas / 5;
+
+			System.out.println("La nota media del alumno " + (i1 + 1) + " es: " + media);
+			System.out.println("La nota máxima del alumno " + (i1 + 1) + " es: " + notaMax);
+			System.out.println("La nota mínima del alumno " + (i1 + 1) + " es: " + notaMin);
+			System.out.println();
 
 		}
 
